@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devenir Rentier</title>
+    <!--Chart.js JS CDN--> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+
+    <div class="main-container">
+        <div class="chart-container-1">
+            <canvas id="Graph_argent_place"></canvas>
+        </div>
+        <div class="chart-container-2">
+            <canvas id="Graph_dividendes"></canvas>
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label>Apport initial</label>
+        <input type="number" id="apport_init_id" class="input-control" value = "10000"/>
+    
+        <label class="right-inline">Rendement</label>
+        <input type="number" id="rendement_id" class="input-control" value = "0.06"/>
+
+        <label class="right-inline">Année de départ</label>
+        <input type="number" id="annee_init_id" class="input-control" value = "2022"/>
+
+        <label class="right-inline">Apport mensuel</label>
+        <input type="number" id="apport_mensuel_id" class="input-control" value = "500"/>
+
+        <label class="right-inline">Période (en années)</label>
+        <input type="number" id="nombre_annees_id" class="input-control" value = "20"/>
+    </div>
+
+    <div class="form-group">
+        <label>&nbsp;</label>
+        <input type="button" id="mybutton" class="bouton-calcul" value="CALCULER" onclick="change(Graph_argent_place, Graph_dividendes)" />
+    
+    </div>
+
+    <script>
+        function change(chart1, chart2){
+            var apport = parseInt(document.getElementById('apport_init_id').value);
+            var rendement = parseFloat(document.getElementById('rendement_id').value);
+            var apport_mensuel = parseFloat(document.getElementById('apport_mensuel_id').value);
+            var annee_init = parseInt(document.getElementById('annee_init_id').value);
+            var nombre_annees = parseInt(document.getElementById('nombre_annees_id').value);
+            [chart1.data.labels, chart1.data.datasets[0].data, chart2.data.datasets[0].data] = calcul(apport, annee_init, rendement, apport_mensuel, nombre_annees, chart1.data.datasets.data, chart1.data.labels, chart2.data.datasets.data);
+            chart2.data.labels = chart1.data.labels;
+            chart1.update();
+            chart2.update();
+        }
+    </script>
+
+    <script>
+        var ctx = document.getElementById('Graph_argent_place').getContext('2d');
+        var ctx2 = document.getElementById('Graph_dividendes').getContext('2d');
+        let initial = 10000;
+        let annee_initiale = 2022;
+        let rendement = 0.06;
+        let apport_mensuel = 500;
+        let nombre_annees = 20;
+
+        var argent_place = [];
+        var dividendes_mensuel = [];
+        var X = [];
+
+        function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel)
+        {
+            argent_place = [];
+            dividendes_mensuel = [];
+            X = [];
+            argent_place.push(initial);
+            for (let i = 1; i < nombre_annees; i++) {
+                argent_place.push(argent_place[i-1] + argent_place[i-1]*rendement + apport_mensuel*12);
+            }
+
+            for (let i=0; i < nombre_annees; i++) {
+                dividendes_mensuel.push(argent_place[i]*rendement / 12);
+            }
+
+            for (let i = 0; i< nombre_annees; i++) {
+                X.push(i + annee_initiale);
+            }
+
+            return [X, argent_place, dividendes_mensuel];
+        }
+
+        [X, argent_place, dividendes_mensuel] = calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel);
+
+
+        var Graph_argent_place = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: X,
+                datasets: [{ 
+                    data: argent_place,
+                    label: "Argent placé",
+                    borderColor: "rgb(62,149,205)",
+                    backgroundColor: "rgb(62,149,205,0.1)",
+                    fill: false,
+                    steppedLine: 'before',
+                }
+                ]
+            },
+            });
+        
+        var Graph_dividendes = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: X,
+                datasets: [{ 
+                    data: dividendes_mensuel,
+                    label: "Dividendes mensuels",
+                    borderColor: "rgb(205,62,90)",
+                    backgroundColor: "rgb(205,62,90,0.1)",
+                    fill: false,
+                    steppedLine: 'before',
+                }
+                ]
+            },
+            });
+    </script>
+
+  
+  
+  </body>
+</html>
