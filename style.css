@@ -1,6 +1,6 @@
 body {  
-    background: #ffffff;
-    padding: 16px;
+  background: linear-gradient(to right, #ffb347, #ffcc33);
+  padding: 16px;
   }
   
 .chart-container-1 {
@@ -18,8 +18,17 @@ body {
   justify-content: space-between;
 }
 
-
-
+h1 { 
+  font-family: 'Roboto Condensed';
+  line-height: 1.25;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 40px 0;
+  font-size: 40px;
+  font-weight: bold;
+}
 
 
 
@@ -78,6 +87,17 @@ textarea {
 }
 
 @media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .chart-container-1 {
+    width: 100%;
+  }
+  
+  .chart-container-2 {
+    width: 100%;
+  }
   .form-group {
     flex-direction: column;
   }
