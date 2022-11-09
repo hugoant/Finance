@@ -9,10 +9,11 @@
     <!--Chart.js JS CDN--> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
   </head>
   <body>
-      <h1> Calculez quand vous pourrez devenir rentier !</h1>
+      <h1>Ne travaillez plus !</h1>
 
     <div class="main-container">
         <div class="chart-container-1">
@@ -23,29 +24,63 @@
         </div>
     </div>
     
-
+    <!--
     <div class="form-group">
-        <label>Apport initial</label>
-        <input type="number" id="apport_init_id" class="input-control" value = "10000"/>
+        <label for="formGroupExampleInput">Apport initial</label>
+        <input type="number" class="form-control" id="formGroupExampleInput" value = "10000"/>
     
         <label class="right-inline">Rendement</label>
-        <input type="number" id="rendement_id" class="input-control" value = "0.06"/>
+        <input type="number" id="rendement_id" class="input-control form-control" value = "0.06"/>
 
         <label class="right-inline">Année de départ</label>
-        <input type="number" id="annee_init_id" class="input-control" value = "2022"/>
+        <input type="number" id="annee_init_id" class="input-control form-control" value = "2022"/>
 
         <label class="right-inline">Apport mensuel</label>
-        <input type="number" id="apport_mensuel_id" class="input-control" value = "500"/>
+        <input type="number" id="apport_mensuel_id" class="input-control form-control" value = "500"/>
 
         <label class="right-inline">Période (en années)</label>
-        <input type="number" id="nombre_annees_id" class="input-control" value = "20"/>
+        <input type="number" id="nombre_annees_id" class="input-control form-control" value = "20"/>
     </div>
+    -->
 
-    <div class="form-group">
-        <label>&nbsp;</label>
-        <input type="button" id="mybutton" class="bouton-calcul" value="CALCULER" onclick="change(Graph_argent_place, Graph_dividendes)" />
-    
-    </div>
+    <form>
+        <div class="row g-5">
+
+          <div class="col-sm">
+            <label for="formGroupExampleInput">Apport&nbsp;initial</label>
+            <input type="number" id="apport_init_id" class="form-control" value = "10000">
+          </div>
+
+          <div class="col-sm">
+            <label for="formGroupExampleInput">Rendement</label>
+            <input type="number" id="rendement_id" class="form-control" value = "0.06">
+          </div>
+          
+          <div class="col-sm">
+            <label for="formGroupExampleInput">Année&nbsp;de&nbsp;départ</label>
+            <input type="number" id="annee_init_id" class="form-control" value = "2022">
+          </div>
+
+          <div class="col-sm">
+            <label for="formGroupExampleInput">Apport&nbsp;mensuel</label>
+            <input type="number" id="apport_mensuel_id" class="form-control" value = "500">
+          </div>
+
+          <div class="col-sm">
+            <label for="formGroupExampleInput">Période&nbsp;(en&nbsp;années)</label>
+            <input type="number" id="nombre_annees_id" class="form-control" value = "20">
+          </div>
+
+        </div>
+      </form>
+
+      <div style="margin-top: 30px", class="col text-center">
+        <input type="button" id="mybutton" class="btn btn-primary" value="CALCULER" onclick="change(Graph_argent_place, Graph_dividendes)" />
+      </div>
+
+    <h3 class="salaire">
+        Salaire mensuel = <span class="badge bg-success" id="salaire_id"></span> €
+    </h3>
     <script src="finance.js"></script>
 
   

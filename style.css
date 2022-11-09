@@ -1,5 +1,5 @@
 body {  
-  background: linear-gradient(to right, #ffb347, #ffcc33);
+  background: linear-gradient(to right, #ffffff, #e4e4e4);
   padding: 16px;
   }
   
@@ -57,33 +57,47 @@ textarea {
 }
 
 .form-group label {
-  display: block;
-  width: 125px;
+  /*display: block;*/
+  display: flex;
+  /*width: 125px;*/
+  width: 10%;
   font-weight: bold;
   font-size: 1em;
+  font-family: 'Roboto Condensed';
+  text-align: center;
 }
 .form-group label.right-inline {
-  text-align: right;
+  text-align: center;
+  /*
   padding-right: 8px;
   padding-left: 10px;
-  width: auto;
+  width: auto;*/
 }
 
 .form-group .input-control {
+  /*
   flex: 1 1 auto;
-  display: block;
+  display: block;*/
+  flex: 0 0 auto;
+  display: flex;
+  width: 10%;
+  min-height: 2em;
   
+  /*
   margin-bottom: 10px;
   margin-right: 8px;
   padding: 4px;
   margin-top: -4px;
+  */
 
 }
 
 .bouton-calcul {
   padding: 5px 15px;
   margin: 5px;
-  min-width: 100px
+  min-width: 100px;
+  font-family: 'Roboto Condensed';
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
@@ -103,10 +117,20 @@ textarea {
   }
   .form-group .input-control {
     margin-top: 2px;
+    display: block;/**/
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .form-group label {
+    width: 100%;
   }
   .form-group label.right-inline {
-    text-align: left;  
+    text-align: center;  
     padding-right: 0;
     padding-left: 0;   
+  }
+  .salaire {
+    text-align: center;
+    margin-top: 30px;
   }
 }
