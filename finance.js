@@ -8,6 +8,8 @@ function change(chart1, chart2){
   chart2.data.labels = chart1.data.labels;
   chart1.update();
   chart2.update();
+
+  document.getElementById("salaire_id").innerHTML = calcul_salaire(chart2);
 }
 
 var ctx = document.getElementById('Graph_argent_place').getContext('2d');
@@ -34,9 +36,6 @@ function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annee
 
   for (let i=0; i < nombre_annees; i++) {
       dividendes_mensuel.push(argent_place[i]*rendement / 12);
-  }
-
-  for (let i = 0; i< nombre_annees; i++) {
       X.push(i + annee_initiale);
   }
 
@@ -46,20 +45,23 @@ function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annee
 [X, argent_place, dividendes_mensuel] = calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel);
 
 
+const data_argent_place = {
+  labels: X,
+  datasets: [{ 
+      data: argent_place,
+      label: "Argent placé",
+      borderColor: "rgb(62,149,205)",
+      backgroundColor: "rgb(62,149,205,0.1)",
+      fill: false,
+      steppedLine: 'before',
+  }
+  ],
+}
+
+
 var Graph_argent_place = new Chart(ctx, {
   type: 'line',
-  data: {
-      labels: X,
-      datasets: [{ 
-          data: argent_place,
-          label: "Argent placé",
-          borderColor: "rgb(62,149,205)",
-          backgroundColor: "rgb(62,149,205,0.1)",
-          fill: false,
-          steppedLine: 'before',
-      }
-      ]
-  },
+  data: data_argent_place,
   });
 
 var Graph_dividendes = new Chart(ctx2, {
@@ -77,3 +79,13 @@ var Graph_dividendes = new Chart(ctx2, {
       ]
   },
   });
+
+
+
+  function calcul_salaire(chart2){
+    var salaire = 0;
+    salaire = chart2.data.datasets[0].data[2]
+    return Math.round(salaire);
+  }
+
+  document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes);
