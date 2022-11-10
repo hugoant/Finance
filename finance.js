@@ -82,10 +82,17 @@ var Graph_dividendes = new Chart(ctx2, {
 
 
 
-  function calcul_salaire(chart2, nombre_annees){
-    var salaire = 0;
-    salaire = chart2.data.datasets[0].data[nombre_annees-1]
-    return Math.round(salaire);
-  }
+function calcul_salaire(chart2, nombre_annees){
+  var salaire = 0;
+  salaire = chart2.data.datasets[0].data[nombre_annees-1]
+  return Math.round(salaire);
+}
 
-  document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes, nombre_annees);
+function calcul_argent_place(chart1, nombre_annees){
+  var argent_place = 0;
+  argent_place = chart1.data.datasets[0].data[nombre_annees-1]
+  return Math.round(argent_place);
+}
+
+document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes, nombre_annees);
+document.getElementById("argent_id").innerHTML = calcul_argent_place(Graph_argent_place, nombre_annees);
