@@ -10,6 +10,7 @@ function change(chart1, chart2){
   chart2.update();
 
   document.getElementById("salaire_id").innerHTML = calcul_salaire(chart2, nombre_annees);
+  document.getElementById("argent_id").innerHTML = calcul_argent_place(chart1, nombre_annees);
 }
 
 var ctx = document.getElementById('Graph_argent_place').getContext('2d');
