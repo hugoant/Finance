@@ -1,6 +1,6 @@
 function change(chart1, chart2){
   var apport = parseInt(document.getElementById('apport_init_id').value);
-  var rendement = parseFloat(document.getElementById('rendement_id').value);
+  var rendement = parseFloat(document.getElementById('rendement_id').value)/100;
   var apport_mensuel = parseFloat(document.getElementById('apport_mensuel_id').value);
   var annee_init = parseInt(document.getElementById('annee_init_id').value);
   var nombre_annees = parseInt(document.getElementById('nombre_annees_id').value);
@@ -16,7 +16,7 @@ var ctx = document.getElementById('Graph_argent_place').getContext('2d');
 var ctx2 = document.getElementById('Graph_dividendes').getContext('2d');
 let initial = 10000;
 let annee_initiale = 2022;
-let rendement = 0.06;
+let rendement = 6;
 let apport_mensuel = 500;
 let nombre_annees = 20;
 
@@ -42,7 +42,7 @@ function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annee
   return [X, argent_place, dividendes_mensuel];
 }
 
-[X, argent_place, dividendes_mensuel] = calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel);
+[X, argent_place, dividendes_mensuel] = calcul(initial, annee_initiale, rendement/100, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel);
 
 
 const data_argent_place = {
@@ -53,7 +53,7 @@ const data_argent_place = {
       borderColor: "rgb(62,149,205)",
       backgroundColor: "rgb(62,149,205,0.1)",
       fill: false,
-      steppedLine: 'before',
+      //steppedLine: 'before',
   }
   ],
 }
@@ -74,7 +74,7 @@ var Graph_dividendes = new Chart(ctx2, {
           borderColor: "rgb(205,62,90)",
           backgroundColor: "rgb(205,62,90,0.1)",
           fill: false,
-          steppedLine: 'before',
+          //steppedLine: 'before',
       }
       ]
   },
@@ -82,10 +82,10 @@ var Graph_dividendes = new Chart(ctx2, {
 
 
 
-  function calcul_salaire(chart2){
+  function calcul_salaire(chart2, nombre_annees){
     var salaire = 0;
-    salaire = chart2.data.datasets[0].data[2]
+    salaire = chart2.data.datasets[0].data[nombre_annees-1]
     return Math.round(salaire);
   }
 
-  document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes);
+  document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes, nombre_annees);
