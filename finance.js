@@ -52,7 +52,7 @@ const data_argent_place = {
       label: "Argent placé",
       borderColor: "rgb(62,149,205)",
       backgroundColor: "rgb(62,149,205,0.1)",
-      fill: false,
+      fill: true,
       //steppedLine: 'before',
   }
   ],
@@ -73,7 +73,7 @@ var Graph_dividendes = new Chart(ctx2, {
           label: "Dividendes mensuels",
           borderColor: "rgb(205,62,90)",
           backgroundColor: "rgb(205,62,90,0.1)",
-          fill: false,
+          fill: true,
           //steppedLine: 'before',
       }
       ]
