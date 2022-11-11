@@ -97,3 +97,24 @@ function calcul_argent_place(chart1, nombre_annees){
 
 document.getElementById("salaire_id").innerHTML = calcul_salaire(Graph_dividendes, nombre_annees);
 document.getElementById("argent_id").innerHTML = calcul_argent_place(Graph_argent_place, nombre_annees);
+
+
+// TEST API
+
+fetch('https://gomakethings.com/about/').then(function (response) {
+	// The API call was successful!
+	return response.text();
+}).then(function (html) {
+
+	// Convert the HTML string into a document object
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(html, 'text/html');
+
+	// Get the image file
+	var img = doc.querySelector('img');
+	console.log(img);
+
+}).catch(function (err) {
+	// There was an error
+	console.warn('Something went wrong.', err);
+});
