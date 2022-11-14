@@ -104,6 +104,10 @@ textarea {
   font-size: 1.6em;
 }
 
+.dividends {
+  margin-top: 30px;
+  text-align: justify;
+}
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
