@@ -4,7 +4,7 @@ function change(chart1, chart2){
   var apport_mensuel = parseFloat(document.getElementById('apport_mensuel_id').value);
   var annee_init = parseInt(document.getElementById('annee_init_id').value);
   var nombre_annees = parseInt(document.getElementById('nombre_annees_id').value);
-  [chart1.data.labels, chart1.data.datasets[0].data, chart2.data.datasets[0].data] = calcul(apport, annee_init, rendement, apport_mensuel, nombre_annees, chart1.data.datasets.data, chart1.data.labels, chart2.data.datasets.data);
+  [chart1.data.labels, chart1.data.datasets[0].data, chart2.data.datasets[0].data, chart1.data.datasets[1].data] = calcul(apport, annee_init, rendement, apport_mensuel, nombre_annees, chart1.data.datasets.data, chart1.data.labels, chart2.data.datasets.data);
   chart2.data.labels = chart1.data.labels;
   chart1.update();
   chart2.update();
@@ -23,16 +23,20 @@ let nombre_annees = 20;
 
 var argent_place = [];
 var dividendes_mensuel = [];
+var investisement = [];
 var X = [];
 
-function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel)
+function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel, investisement)
 {
   argent_place = [];
   dividendes_mensuel = [];
+  investisement = [];
   X = [];
   argent_place.push(initial);
+  investisement.push(initial);
   for (let i = 1; i < nombre_annees; i++) {
       argent_place.push(argent_place[i-1] + argent_place[i-1]*rendement + apport_mensuel*12);
+      investisement.push(investisement[i-1] + apport_mensuel*12)
   }
 
   for (let i=0; i < nombre_annees; i++) {
@@ -40,10 +44,10 @@ function calcul(initial, annee_initiale, rendement, apport_mensuel, nombre_annee
       X.push(i + annee_initiale);
   }
 
-  return [X, argent_place, dividendes_mensuel];
+  return [X, argent_place, dividendes_mensuel, investisement];
 }
 
-[X, argent_place, dividendes_mensuel] = calcul(initial, annee_initiale, rendement/100, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel);
+[X, argent_place, dividendes_mensuel, investisement] = calcul(initial, annee_initiale, rendement/100, apport_mensuel, nombre_annees, argent_place, X, dividendes_mensuel, investisement);
 
 
 const data_argent_place = {
@@ -55,6 +59,12 @@ const data_argent_place = {
       backgroundColor: "rgb(62,149,205,0.1)",
       fill: true,
       //steppedLine: 'before',
+  }, {
+      data: investisement,
+      label: "Investissement",
+      borderColor: "rgb(0,76,143)",
+      backgroundColor: "rgb(0,76,143,0.2)",
+      fill: true,
   }
   ],
 }
